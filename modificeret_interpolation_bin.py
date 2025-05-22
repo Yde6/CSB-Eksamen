@@ -32,8 +32,10 @@ def equi_bound(h, N):
     M = 10**(N+1)
     return 0.25*h**(N+1)*M
 
+# Values of N to test
 N_values = [5, 10, 20, 30, 40]
 
+# Set up the plot
 plt.figure(figsize=(12, 8))
 
 # Print the results
@@ -43,9 +45,9 @@ print('-'*34)
 print('  N     Error bound       Error')
 print('-'*34)
 
-x_plot = [a+k*(b-a)/100 for k in range(1001)]
+x_plot = [a + k*(b-a)/1000 for k in range(1001)]
 y_plot = [f(x) for x in x_plot]
-plt.plot(x_plot, y_plot, label='Original_f(x)', color='black', linewidth=2)
+plt.plot(x_plot, y_plot, label="Original f(x)", color="black", linewidth=2)
 
 for N in N_values:
     
@@ -72,11 +74,14 @@ for N in N_values:
     # Print a table
     print('{:3d}  {:14.5E}  {:13.5E}'.format(N, \
           equi_bound(h,N), error))
-          
+    
+    # Plot the error
     plt.plot(x_test, approx, label=f'N={N}')
-    plt.xlabel('x')
-    plt.ylabel('Error | f(x) - p_N(x) |')
-    plt.title('E r r o r | f ( x ) − p_N( x ) |  f o r  D i f f e r e n t  Values  o f N ')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
+
+# Add labels and title
+plt.xlabel('x')
+plt.ylabel('Error |f(x) - p_N(x)|')
+plt.title('Error |f(x) - p_N(x)| for Different Values of N')
+plt.legend()
+plt.grid(True)
+plt.show()
