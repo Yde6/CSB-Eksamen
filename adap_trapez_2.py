@@ -35,10 +35,12 @@ def adaptivetrapezoid(f,a,b,tol):
     return adaptivestep(f,a,b,tol)
 
 def fun(x):
-    if x <= np.sqrt(3):
-        return -(x-np.sqrt(3))**2
-    else:
-        return (x-np.sqrt(3))**2
+    x = np.asarray(x) # Sørg for at x er en NumPy array
+    result = np.zeros_like(x, dtype=float)
+    mask_le = x <= np.sqrt(3)
+    result[mask_le] = -(x[mask_le] - np.sqrt(3))**2
+    result[~mask_le] = (x[~mask_le] - np.sqrt(3))**2
+    return result
 
 Iexact = 18 - 11*np.sqrt(3)
     
