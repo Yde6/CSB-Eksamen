@@ -35,17 +35,18 @@ def adaptivetrapezoid(f,a,b,tol):
     return adaptivestep(f,a,b,tol)
 
 def fun(x):
-    x = np.asarray(x) # Sørg for at x er en NumPy array
-    result = np.zeros_like(x, dtype=float)
-    mask_le = x <= np.sqrt(3)
-    result[mask_le] = -(x[mask_le] - np.sqrt(3))**2
-    result[~mask_le] = (x[~mask_le] - np.sqrt(3))**2
-    return result
-
-Iexact = 18 - 11*np.sqrt(3)
+    x = np.asarray(x)  # konverter input til array hvis det ikke er det
+    return np.where(x <= np.sqrt(3),
+                    -(x - np.sqrt(3))**2,
+                     (x - np.sqrt(3))**2)
     
-a = 0.0
-b = 3.0
+
+Iexact = 18 - 11*np.sqrt(3) # For hele intervallet
+#Iexact = -1.727885683 # For intervallet [0;1.5]
+#Iexact = 0.6753267990 #For intervallet [1.5;3]
+
+a = 0
+b = 3
 tol = 1e-3
 
 J = adaptivetrapezoid(fun, a, b, tol)
@@ -60,5 +61,5 @@ plt.plot([a, b], [0, 0], 'k--')
 plt.plot(x, fun(x), 'b-')
 plt.plot(quadpoints, fun(quadpoints), 'r.')
 plt.xlim([a, b])
-plt.title('Adaptiv Trapezregel')
+plt.title(f'Adaptiv Trapezregel for [{a};{b}]')
 plt.show()
