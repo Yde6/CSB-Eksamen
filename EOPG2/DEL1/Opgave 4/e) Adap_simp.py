@@ -43,7 +43,7 @@ def fun(x):
                      (x - np.sqrt(3))**2)
 Iexact = 18-11*np.sqrt(3)
     
-a = 1.5
+a = 0
 b = 3
 # Pas på med for lav tolerance: Der er ikke sat et maksimum på antallet af 
 # inddelinger, så ved meget lav tolerance kan afrundingsfejl gøre at den 
@@ -62,5 +62,8 @@ plt.plot([a,b],[0,0],'k--')
 plt.plot(x,fun(x),'b-')
 plt.plot(quadpoints,fun(quadpoints),'r.')
 plt.xlim([a,b])
-plt.title('Adaptiv Simpson regel')
+plt.title(f'Adaptiv Simpson regel for [{a} ; {b}]')
+fejl = abs(Iexact - J)
+antal = len(quadpoints) - 1
+
 plt.show()
