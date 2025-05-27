@@ -37,14 +37,13 @@ def adaptivesimpson(f,a,b,tol):
     return adaptivestep(f,a,b,tol)
 
 def fun(x):
-    if x <= np.sqrt(3):
-        return -(x-np.sqrt(3))**2
-    else:
-        return (x-np.sqrt(3))**2
-
+    x = np.asarray(x)  # konverter input til array hvis det ikke er det
+    return np.where(x <= np.sqrt(3),
+                    -(x - np.sqrt(3))**2,
+                     (x - np.sqrt(3))**2)
 Iexact = 18-11*np.sqrt(3)
     
-a = 0.0
+a = 1.5
 b = 3
 # Pas på med for lav tolerance: Der er ikke sat et maksimum på antallet af 
 # inddelinger, så ved meget lav tolerance kan afrundingsfejl gøre at den 
@@ -63,18 +62,5 @@ plt.plot([a,b],[0,0],'k--')
 plt.plot(x,fun(x),'b-')
 plt.plot(quadpoints,fun(quadpoints),'r.')
 plt.xlim([a,b])
-plt.title('Adaptiv Simpson regel for $f(x) = x\,\sin(x^2)$')
-plt.show()
-
-# Ved tolerance på 1e-4, giver øvre grænse på 13500 af fjerde afledede at der 
-# skal bruges S_166, frem for 112 inddelinger med adaptiv metode. En besparelse 
-# på 32,5%. 
-# Bemærk at den fjerde afledede tager meget store værdier i en lille del af 
-# intervallet.
-plt.figure()
-# abs af fjerde afledede:
-plt.plot(x,np.abs(-60*fun(x) - 80*(x**3)*np.cos(x**2) + 16*(x**4)*fun(x)),'b-') 
-plt.xlim([a,b])
-plt.ylim([0,13500])
-plt.title('Plot af $|f^{(4)}|$')
+plt.title('Adaptiv Simpson regel')
 plt.show()
