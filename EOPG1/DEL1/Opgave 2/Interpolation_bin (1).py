@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from math import sin
+from math import sin, cos, pi
 
 # Interpolating polynomial
 def lagrange(x, x_values, y_values): 
@@ -42,7 +42,9 @@ for N in range(10,91,10):
     
     # Parameters for Lagrange interpolation
     h = abs(b-a)/N
-    x_values = [a+k*h for k in range(N+1)] 
+    x_values = [a+k*h for k in range(N+1)]
+    #skift til chebychev
+    #x_values = [a + (b - a) * D((1 - cos(pi * j / N)) / 2) for j in range(N + 1)]
     y_values = [f(x_values[k]) for k in range(N+1)]
    
     # New points for calculating the error max|f(x)-p_N(x)|
