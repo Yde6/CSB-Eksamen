@@ -44,6 +44,8 @@ for N in range(2, 91, 2):
     # Parameters for Lagrange interpolation
     h = abs(b - a) / N
     x_values = [a + k * h for k in range(N + 1)]
+    #Chebychev
+    #x_values = [a + (b - a) * (1 - cos(pi * j / N)) / 2 for j in range(N + 1)]
     y_values = [f(x) for x in x_values]
 
     # Points for evaluation
