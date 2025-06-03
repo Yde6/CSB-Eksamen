@@ -51,3 +51,10 @@ for k in range(N):
 plt.plot(T, X1, 'r-', T, X2, 'b-')
 plt.grid()
 plt.show()
+
+zmax = np.max(X1)
+index_max = np.argmax(X1)
+tmax = T[index_max]
+
+print(f"z_max = {zmax:.4f}")
+print(f"t_max = {tmax:.4f}")
