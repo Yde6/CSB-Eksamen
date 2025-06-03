@@ -53,3 +53,10 @@ plt.title("RK4 løsning for z(t) og v(t)")
 plt.grid()
 plt.legend()
 plt.show()
+
+zmax = np.max(X1)
+index_max = np.argmax(X1)
+tmax = T[index_max]
+
+print(f"z_max = {zmax:.4f}")
+print(f"t_max = {tmax:.4f}")
